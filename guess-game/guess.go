@@ -22,20 +22,24 @@ func main() {
 
 	reader := bufio.NewReader(os.Stdin) // Create a bufio.Reader, which lets us read keyboard input.
 
-	fmt.Print("Make a guess: ")           // Ask for a number.
-	input, err := reader.ReadString('\n') // Read what the user types, up until they press Enter.
-	if err != nil {
-		log.Fatal(err)
-	}
-	input = strings.TrimSpace(input)  // Remove the newline.
-	guess, err := strconv.Atoi(input) // Convert the input string to an integer.
-	if err != nil {
-		log.Fatal(err)
-	}
+	for guesses := 0; guesses < 10; guesses++ { // Use the "guesses" variable to track the number of guesses so far.
+		fmt.Println("You have", 10-guesses, "guesses left.") // Subtract the number of guesses from 10 to tell the player how many they have left.
 
-	if guess < target {
-		fmt.Println("Oops. Your guess was LOW.")
-	} else if guess > target {
-		fmt.Println("Oops. Your guess was HIGH.")
+		fmt.Print("Make a guess: ")           // Ask for a number.
+		input, err := reader.ReadString('\n') // Read what the user types, up until they press Enter.
+		if err != nil {
+			log.Fatal(err)
+		}
+		input = strings.TrimSpace(input)  // Remove the newline.
+		guess, err := strconv.Atoi(input) // Convert the input string to an integer.
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		if guess < target {
+			fmt.Println("Oops. Your guess was LOW.")
+		} else if guess > target {
+			fmt.Println("Oops. Your guess was HIGH.")
+		}
 	}
 }
