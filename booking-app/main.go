@@ -6,6 +6,7 @@ func main() {
 	conferenceName := "Go Conference" // another method for define variable.
 	const conferenceTickets uint = 50 // this variable type cannot be changed of value
 	var remainingTickets uint = 50    // except negative value
+	var bookings [50]string           // var bookings = [50]string{"1", "2", "3"} // array defination in Go.
 
 	// %v return the variable value
 	fmt.Printf("Welcome to %v our conference booking application\n", conferenceName)
@@ -17,6 +18,7 @@ func main() {
 	var email string
 	var userTickets uint
 	// ask user for their name
+	// Pointer is variable that is used to store the memory address of another variable.
 	fmt.Println("Enter your first name: ")
 	fmt.Scan(&firstName)
 
@@ -30,6 +32,12 @@ func main() {
 	fmt.Scan(&userTickets)
 
 	remainingTickets = conferenceTickets - userTickets
+	bookings[0] = firstName + " " + lastName
+
+	fmt.Printf("The whole array: %v\n", bookings)
+	fmt.Printf("The first value: %v\n", bookings[0])
+	fmt.Printf("Array type: %T\n", bookings)
+	fmt.Printf("Array length: %v\n", len(bookings))
 
 	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v \n", firstName, lastName, userTickets, email)
 	fmt.Printf("%v tickets remaining for %v \n", remainingTickets, conferenceTickets)
