@@ -74,6 +74,7 @@ func getUserInput() (string, string, string, uint) {
 	var lastName string
 	var email string
 	var userTickets uint
+
 	// ask user for their name
 	// Pointer is variable that is used to store the memory address of another variable.
 	fmt.Println("Enter your first name: ")
