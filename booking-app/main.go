@@ -3,13 +3,13 @@ package main
 import (
 	"booking-app/helper"
 	"fmt"
-	"strings"
+	"strconv"
 )
 
-const conferenceTickets uint = 50    // this variable type cannot be changed of value
-var conferenceName = "Go Conference" // another method for define variable.
-var remainingTickets uint = 50       // except negative value
-var bookings = []string{}            //var bookings []string             // slice defination in Go.
+const conferenceTickets uint = 50           // this variable type cannot be changed of value
+var conferenceName = "Go Conference"        // another method for define variable.
+var remainingTickets uint = 50              // except negative value
+var bookings = make([]map[string]string, 0) // make a map list
 
 func main() {
 	greetUsers()
@@ -50,8 +50,7 @@ func greetUsers() {
 func getFirstNames() []string {
 	firstNames := []string{}
 	for _, booking := range bookings { // foreach loop
-		var names = strings.Fields(booking)
-		firstNames = append(firstNames, names[0])
+		firstNames = append(firstNames, booking["firstName"])
 	}
 
 	return firstNames
@@ -81,10 +80,19 @@ func getUserInput() (string, string, string, uint) {
 
 func bookTicket(userTickets uint, firstName string, lastName string, email string) {
 	remainingTickets = remainingTickets - userTickets
-	bookings = append(bookings, firstName+" "+lastName)
+
+	// create a map for user
+	var userData = make(map[string]string) // defining a map variable
+	userData["firstName"] = firstName
+	userData["lastName"] = lastName
+	userData["email"] = email
+	userData["numberOfTickets"] = strconv.FormatUint(uint64(userTickets), 10)
+
+	bookings = append(bookings, userData)
+	fmt.Printf("List of bookings is %v\n", bookings)
 
 	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v \n", firstName, lastName, userTickets, email)
 	fmt.Printf("%v tickets remaining for %v \n", remainingTickets, conferenceName)
 }
 
-// Multiple packages
+// Maps
