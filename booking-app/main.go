@@ -11,10 +11,7 @@ func main() {
 	var remainingTickets uint = 50    // except negative value
 	bookings := []string{}            //var bookings []string             // slice defination in Go.
 
-	// %v return the variable value
-	fmt.Printf("Welcome to %v our conference booking application\n", conferenceName)
-	fmt.Printf("We have total of %v tickets and %v are still available.\n", conferenceTickets, remainingTickets)
-	fmt.Println("Get your tickets here to attend")
+	greetUsers(conferenceName, conferenceTickets, remainingTickets)
 
 	for { // infinite loop
 		var firstName string
@@ -46,14 +43,7 @@ func main() {
 			fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v \n", firstName, lastName, userTickets, email)
 			fmt.Printf("%v tickets remaining for %v \n", remainingTickets, conferenceTickets)
 
-			firstNames := []string{}
-
-			for _, booking := range bookings { // foreach loop
-				var names = strings.Fields(booking)
-				firstNames = append(firstNames, names[0])
-			}
-
-			fmt.Printf("These are all our bookings: %v\n", firstNames)
+			printFirstNames(bookings)
 
 			if remainingTickets == 0 {
 				fmt.Println("Our conference is booked out. Come back next year.")
@@ -71,4 +61,20 @@ func main() {
 			}
 		}
 	}
+}
+
+func greetUsers(conferenceName string, conferenceTickets uint, remainingTickets uint) {
+	// %v return the variable value
+	fmt.Printf("Welcome to %v our conference booking application\n", conferenceName)
+	fmt.Printf("We have total of %v tickets and %v are still available.\n", conferenceTickets, remainingTickets)
+	fmt.Println("Get your tickets here to attend")
+}
+
+func printFirstNames(bookings []string) {
+	firstNames := []string{}
+	for _, booking := range bookings { // foreach loop
+		var names = strings.Fields(booking)
+		firstNames = append(firstNames, names[0])
+	}
+	fmt.Printf("These are all our bookings: %v\n", firstNames)
 }
