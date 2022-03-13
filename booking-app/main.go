@@ -1,6 +1,7 @@
 package main
 
 import (
+	"booking-app/helper"
 	"fmt"
 	"strings"
 )
@@ -14,7 +15,7 @@ func main() {
 	greetUsers()
 	for { // infinite loop
 		firstName, lastName, email, userTickets := getUserInput()
-		isValidName, isValidEmail, isValidTicketNumber := validateUserInput(firstName, lastName, email, userTickets)
+		isValidName, isValidEmail, isValidTicketNumber := helper.ValidateUserInput(firstName, lastName, email, userTickets, remainingTickets)
 
 		if isValidName && isValidEmail && isValidTicketNumber {
 			bookTicket(userTickets, firstName, lastName, email)
@@ -86,4 +87,4 @@ func bookTicket(userTickets uint, firstName string, lastName string, email strin
 	fmt.Printf("%v tickets remaining for %v \n", remainingTickets, conferenceName)
 }
 
-// Packages in Go
+// Multiple packages
