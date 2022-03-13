@@ -3,13 +3,19 @@ package main
 import (
 	"booking-app/helper"
 	"fmt"
-	"strconv"
 )
 
-const conferenceTickets uint = 50           // this variable type cannot be changed of value
-var conferenceName = "Go Conference"        // another method for define variable.
-var remainingTickets uint = 50              // except negative value
-var bookings = make([]map[string]string, 0) // make a map list
+const conferenceTickets uint = 50    // this variable type cannot be changed of value
+var conferenceName = "Go Conference" // another method for define variable.
+var remainingTickets uint = 50       // except negative value
+var bookings = make([]User, 0)       // make a User type struct list
+
+type User struct {
+	firstName       string
+	lastName        string
+	email           string
+	numberOfTickets uint
+}
 
 func main() {
 	greetUsers()
@@ -50,7 +56,7 @@ func greetUsers() {
 func getFirstNames() []string {
 	firstNames := []string{}
 	for _, booking := range bookings { // foreach loop
-		firstNames = append(firstNames, booking["firstName"])
+		firstNames = append(firstNames, booking.firstName)
 	}
 
 	return firstNames
@@ -82,11 +88,12 @@ func bookTicket(userTickets uint, firstName string, lastName string, email strin
 	remainingTickets = remainingTickets - userTickets
 
 	// create a map for user
-	var userData = make(map[string]string) // defining a map variable
-	userData["firstName"] = firstName
-	userData["lastName"] = lastName
-	userData["email"] = email
-	userData["numberOfTickets"] = strconv.FormatUint(uint64(userTickets), 10)
+	var userData = User{
+		firstName:       firstName,
+		lastName:        lastName,
+		email:           email,
+		numberOfTickets: userTickets,
+	} // defining a User type struct
 
 	bookings = append(bookings, userData)
 	fmt.Printf("List of bookings is %v\n", bookings)
