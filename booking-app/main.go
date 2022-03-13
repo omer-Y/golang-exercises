@@ -56,14 +56,6 @@ func getFirstNames() []string {
 	return firstNames
 }
 
-func validateUserInput(firstName string, lastName string, email string, userTickets uint) (bool, bool, bool) {
-	isValidName := len(firstName) >= 2 && len(lastName) >= 2
-	isValidEmail := strings.Contains(email, "@")
-	isValidTicketNumber := userTickets > 0 && userTickets <= remainingTickets
-
-	return isValidName, isValidEmail, isValidTicketNumber // go allowed is multiple return
-}
-
 func getUserInput() (string, string, string, uint) {
 	var firstName string
 	var lastName string
@@ -94,4 +86,4 @@ func bookTicket(userTickets uint, firstName string, lastName string, email strin
 	fmt.Printf("%v tickets remaining for %v \n", remainingTickets, conferenceName)
 }
 
-// package level paremeters
+// Packages in Go
